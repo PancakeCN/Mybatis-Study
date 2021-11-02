@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口-->
+<mapper namespace="com.pancake.dao.UserDao">
+    <!--select查询语句,resultType里面应该写返回结果，写泛型里面的东西，例如User，resultSets返回一组，resultType返回一个-->
+    <select id="getUserList" resultType="com.pancake.pojo.User">
+        select * from mybatis.user
+    </select>
+</mapper>
