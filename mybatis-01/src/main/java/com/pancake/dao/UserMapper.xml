@@ -3,9 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace=绑定一个对应的Dao/Mapper接口-->
-<mapper namespace="com.pancake.dao.UserDao">
+<mapper namespace="com.pancake.dao.UserMapper">
     <!--select查询语句,resultType里面应该写返回结果，写泛型里面的东西，例如User，resultSets返回一组，resultType返回一个-->
     <select id="getUserList" resultType="com.pancake.pojo.User">
         select * from mybatis.user
     </select>
+
+    <select id="getUserById" parameterType="int" resultType="com.pancake.pojo.User">
+        select * from mybatis.user where id = #{id}
+    </select>
+
+    <!--  对象中的属性，可以直接取出来  -->
+    <insert id="addUser" parameterType="com.pancake.pojo.User">
+        insert into mybatis.user (id, name, pwd) value (#{id}, #{name}, #{pwd});
+    </insert>
+
+    <update id="updateUser" parameterType="com.pancake.pojo.User">
+        update mybatis.user
+        set name = #{name}, pwd = #{pwd}
+        where id = #{id};
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete
+        from mybatis.user
+        where id = #{id};
+    </delete>
 </mapper>
