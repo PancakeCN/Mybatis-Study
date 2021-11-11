@@ -9,9 +9,9 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8"/>
-                <property name="username" value="root"/>
-                <property name="password" value="cwxyr990125"/>
+                <property name="url" value="jdbc:mysql://112.124.53.175:3306/mybatis?useSSL=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=GMT%2B8"/>
+                <property name="username" value="mybatis"/>
+                <property name="password" value="wjCRJGpG3Ct844MT"/>
             </dataSource>
         </environment>
     </environments>
