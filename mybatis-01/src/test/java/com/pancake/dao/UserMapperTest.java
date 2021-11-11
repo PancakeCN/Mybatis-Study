@@ -5,9 +5,22 @@ import com.pancake.utils.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UserMapperTest {
+    @Test
+    public void getUserLikeTest(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+        List<User> userLike = mapper.getUserLike("%李%");
+        for (User user:userLike) {
+            System.out.println(user);
+        }
+    }
+
     @Test
     public void test(){
         //1、获取SqlSession对象
@@ -46,6 +59,22 @@ public class UserMapperTest {
     }
 
     @Test
+    public void getUserById2Test(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("id", 7);
+        map.put("name", "okok");
+
+        User userById = mapper.getUserById2(map);
+        System.out.println(userById);
+
+        sqlSession.close();
+    }
+
+    @Test
     public void addUserTest(){
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         UserMapper mapper = sqlSession.getMapper(UserMapper.class);
@@ -53,6 +82,28 @@ public class UserMapperTest {
         int res = mapper.addUser(new User(4, "王五", "123456"));
 
         if (res>0){
+            System.out.println("添加成功！");
+        }
+
+        //【增删改需要提交事务！！！】
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    @Test
+    public void addUser2Test(){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("userId", 8);
+        map.put("userName", "xiaoxiao");
+        map.put("passWord", "123456");
+
+
+        int res = mapper.addUser2(map);
+
+        if (res > 0){
             System.out.println("添加成功！");
         }
 

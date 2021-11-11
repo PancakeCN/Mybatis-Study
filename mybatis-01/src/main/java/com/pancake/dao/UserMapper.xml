@@ -4,18 +4,36 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace=绑定一个对应的Dao/Mapper接口-->
 <mapper namespace="com.pancake.dao.UserMapper">
+    <select id="getUserLike" resultType="com.pancake.pojo.User">
+        select *
+        from mybatis.user
+        where name like #{value};
+    </select>
+
     <!--select查询语句,resultType里面应该写返回结果，写泛型里面的东西，例如User，resultSets返回一组，resultType返回一个-->
     <select id="getUserList" resultType="com.pancake.pojo.User">
         select * from mybatis.user
     </select>
 
-    <select id="getUserById" parameterType="int" resultType="com.pancake.pojo.User">
+    <!--  传递单个基本参数类型的时候，parameterType="map"可省略 -->
+    <select id="getUserById" resultType="com.pancake.pojo.User">
         select * from mybatis.user where id = #{id}
+    </select>
+
+    <select id="getUserById2" parameterType="map" resultType="com.pancake.pojo.User">
+        select * from mybatis.user where id = #{id} and name = #{name}
     </select>
 
     <!--  对象中的属性，可以直接取出来  -->
     <insert id="addUser" parameterType="com.pancake.pojo.User">
         insert into mybatis.user (id, name, pwd) value (#{id}, #{name}, #{pwd});
+    </insert>
+
+    <!--  对象中的属性，可以直接取出来
+          传递map中的key
+     -->
+    <insert id="addUser2" parameterType="map">
+        insert into mybatis.user (id, name, pwd) value (#{userId}, #{userName}, #{passWord});
     </insert>
 
     <update id="updateUser" parameterType="com.pancake.pojo.User">
